@@ -7,3 +7,11 @@ services:
     expose:
       - "8000"
     command: gunicorn -w2 -b :8000 app:app
+
+  nginx:
+      restart: always
+      build: ./nginx
+      ports:
+        - "80:80"
+      depends_on:
+        - web
