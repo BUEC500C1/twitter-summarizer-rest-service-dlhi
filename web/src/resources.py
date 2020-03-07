@@ -9,6 +9,7 @@ from twitter import get_tweets, get_num_followers
 import uuid
 from ffmpeg_converter import removeVideo, uuid_keys
 from worker import workerQ
+from util import parent_dir
 
 
 class LastTweet(Resource):
@@ -43,7 +44,7 @@ class getStatus(Resource):
     def get(self, args):
         uuid = args["uuid"]
         if uuid in uuid_keys:
-            return "Not done, please wait"
+            return jsonify("Result: Not done, please wait")
         else:
             return "Finished!"
 
@@ -56,7 +57,7 @@ class SendTweetVideo(Resource):
             return "Not done, please wait"
         else:
             try:
-                video = send_file(f'videos/{uuid}.mp4',
+                video = send_file(f'{parent_dir(__file__)}/videos/{uuid}.mp4',
                                   attachment_filename=f'{uuid}.mp4')
                 removeVideo(uuid)
                 return video
