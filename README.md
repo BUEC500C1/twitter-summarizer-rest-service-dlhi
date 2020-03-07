@@ -1,4 +1,5 @@
-# HW4: FFmpeg
+# David Li
+# HW5: FFmpeg
 
 ## Summary
 The API receives a Twitter handle which then converts the last 3 tweets of the user into a MP4 video. The API first uses the Tweepy library to grab the Twitter profile from the provided user. Then, the ffmpeg module initializes, where the tweets properties, such as the text and the images, are loaded into a function to create a single tweet image stored as JPEGs. These images are then fed into a function that generates a video for each individual tweet. After words, each of these generated videos are concatenated to one another to create one video MP4 file.
