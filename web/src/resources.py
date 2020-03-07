@@ -35,7 +35,7 @@ class CreateTweetVideo(Resource):
         uuid_keys.append(unique_code)
         print("Added KEY: ", uuid_keys)
         # create_video(username)
-        return f'Video for user {username} started! UUID: {unique_code}'
+        return jsonify(f'Video for user {username} started! UUID: {unique_code}')
 
 
 class getStatus(Resource):
