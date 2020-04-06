@@ -1,6 +1,8 @@
 # David Li
 # HW5: FFmpeg
 
+*Updated README for April 6, 2020 Grading*
+
 ## Summary
 The API receives a Twitter handle which then converts the last 3 tweets of the user into a MP4 video. The API first uses the Tweepy library to grab the Twitter profile from the provided user. Then, the ffmpeg module initializes, where the tweets properties, such as the text and the images, are loaded into a function to create a single tweet image stored as JPEGs. These images are then fed into a function that generates a video for each individual tweet. After words, each of these generated videos are concatenated to one another to create one video MP4 file.
 
@@ -11,7 +13,7 @@ Image and video generation are cleaned up at the end of each function call to pr
 ### AWS Hosting
 The web application is hosted on
 ```
-http://ec2-54-175-4-108.compute-1.amazonaws.com
+http://ec2-3-92-178-152.compute-1.amazonaws.com
 ```
 The application is using Docker and Docker-compose to containerize the flask app and nginx. nginx forwards requests from port 80 to the flask application running on port 8000 through gunicorn.
 
@@ -55,19 +57,26 @@ The user can use 4 different requests to the API:
 
 Ask the API to create a video for Michelle Obama
 ```
-curl http://127.0.0.1:5000/createVideo?handle="michelleobama"
+curl http://ec2-3-92-178-152.compute-1.amazonaws.com/createVideo?handle="michelleobama"
 ```
 This returns:
 > "Video for user michelleobama started! UUID: 6aa77ebfff1c46248755cf507dbbf857"
 
 To view the status of your video, use the following command:
 ```
-curl http://127.0.0.1:5000/getStatus?uuid=6aa77ebfff1c46248755cf507dbbf857
+curl http://ec2-3-92-178-152.compute-1.amazonaws.com/getStatus?uuid=6aa77ebfff1c46248755cf507dbbf857
 ```
 
-To download the video in the current directory of the terminal, use the following command:
+To view the downloaded video, go to any browser and type in the following into the URL bar:
 ```
-curl http://127.0.0.1:5000/getVideo?uuid=6aa77ebfff1c46248755cf507dbbf857 --output video.mp4
+http://ec2-3-92-178-152.compute-1.amazonaws.com/getVideo?uuid=6aa77ebfff1c46248755cf507dbbf857
+```
+
+Note: You must input the correct UUID and the video will be deleted once you make this request.
+
+To download the video, type in the following command into a terminal:
+```
+curl http://ec2-3-92-178-152.compute-1.amazonaws.com/getVideo?uuid=6aa77ebfff1c46248755cf507dbbf857 --output video.mp4 
 ```
 
 Note! When downloading the video, if you submit a **/getVideo** request without the --output flag, you will not be able to download your video again. You will have to resubmit another **/createVideo** request.
